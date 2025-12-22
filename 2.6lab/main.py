@@ -1,38 +1,52 @@
+#Первый файл "sorting_module.py"
+"Модуль"
 def insertion_sort(arr):
-    a = arr.copy()
-    for i in range(1, len(a)):
-        key = a[i]
-        j = i - 1
-        while j >= 0 and a[j] > key:
-            a[j + 1] = a[j]
-            j -= 1
-        a[j + 1] = key
-    return a
+    result = arr.copy()
+    for i in range(1, len(result)):
+        for j in range(i, 0, -1):
+            if (result[j] < result[j-1]):
+                result[j], result[j-1] = result[j-1], result[j]
+    return result
 
 def bubble_sort(arr):
-    a = arr.copy()
-    n = len(a)
-    for i in range(n - 1):
-        for j in range(n - 1 - i):
-            if a[j] > a[j + 1]:
-                a[j], a[j + 1] = a[j + 1], a[j]
-    return a
+    result = arr.copy()
+    n = len(result)
+    for i in range(n):
+        for j in range(n - i - 1):
+            if result[j] > result[j + 1]:
+                result[j], result[j + 1] = result[j + 1], result[j]
+    return result
 
 def selection_sort(arr):
-    a = arr.copy()
-    n = len(a)
-    for i in range(n - 1):
-        min_idx = i
+    result = arr.copy()
+    n = len(result)
+    for i in range(n):
+        min_index = i
         for j in range(i + 1, n):
-            if a[j] < a[min_idx]:
-                min_idx = j
-        a[i], a[min_idx] = a[min_idx], a[i]
-    return a
+            if result[j] < result[min_index]:
+                min_index = j
+        result[i], result[min_index] = result[min_index], result[i]
+    return result
 
-    arr = [5, 2, 8, 1, 9, 3]
+#Второй файл "main.py"
+import sorting_module
 
-    print(insertion_sort(arr))
+if __name__ == "__main__":
+    print("Используем модуль")
 
-    print(bubble_sort(arr))
+    numbers = [7, 3, 9, 2, 5]
+    print('Изначальный массив:')
+    print(numbers)
+    print()
 
-    print(selection_sort(arr))
+    print("Сортировка методом вставки:")
+    print(sorting_module.insertion_sort(numbers))
+    print()
+
+    print("Сортировка методом обмена:")
+    print(sorting_module.bubble_sort(numbers))
+    print()
+
+    print("Сортировка методом выбора:")
+    print(sorting_module.selection_sort(numbers))
+    print()
